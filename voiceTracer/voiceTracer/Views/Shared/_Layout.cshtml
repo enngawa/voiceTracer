@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>voiceTracer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+
+</head>
+<body>
+    <header>
+        <div class='fixed-top'>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-2">
+                <div class="container"> 
+                    <a class="navbar-brand"><i class="fas fa-users fa-2x"></i></a>
+                    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <button type="button" class="box-anchor nav-link text-dark" data-toggle="modal" data-target="#create_room">
+                                    <div class="box">
+                                        <i class="fas fa-plus-circle"></i>
+                                        <div>会議室作成</div>
+                                    </div>
+                                </button>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <div>
+                                    <span id="group_name">会議室名</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            <div class="form-row align-items-center">
+                <div class="col-sm-5 my-1">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">名前</div>
+                        </div>
+                        <input type="text" class="form-control" id="input_name" placeholder="名前を入力">
+                    </div>
+                </div>
+                <div class="col-auto my-1">
+                    <button type="button" class="btn btn-primary" id="connect" style="width:180px;"><i class="fas fa-microphone"></i><span id="vc_btntext">音声認識を有効にする</span></button>
+                    <audio src="https://soundeffect-lab.info/sound/button/mp3/cancel2.mp3" id="disable_mic"></audio>
+                    
+                </div>
+                <div class="col-auto my-1">
+                    <button type="button" class="btn btn-info" id="output"><i class="fas fa-download"></i>CSV出力</button>
+                    <a style="display: none" id="downloader" href="#"></a>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-12">
+                    <div class="input-group">
+                        <textarea id="result" class="main_input form-control form-control-sm" aria-describedby="basic-addon2" placeholder="テキストを入力してください。"></textarea>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="send_self">送信</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <footer class="border-top footer text-muted">
+    </footer>
+
+    <div class="modal fade" id="create_room" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title font-weight-bold">会議部屋の名前を設定してください</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="md-form">
+                        <input type="text" id="title" class="form-control validate" placeholder="ex. 2020/12/31 15:00～17:00 XXXXXX部 第1回テスト会議">
+                        <label data-error="wrong" data-success="right" for="title">重複しないように文字多めで設定をお願いします。</label>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    会議室に入る
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
